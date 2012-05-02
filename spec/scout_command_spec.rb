@@ -9,7 +9,7 @@ describe ScoutCommand do
   let(:options) { {} }
   let(:node_name) { "i-12345678" }
   let(:node_environment) { "_default" }
-  let(:rvm_ruby) { nil }
+  let(:rvm_ruby_string) { nil }
 
   let :node do
     {
@@ -19,7 +19,7 @@ describe ScoutCommand do
         "key" => key,
         "name" => name,
         "options" => options,
-        "rvm_ruby" => rvm_ruby,
+        "rvm_ruby_string" => rvm_ruby_string,
       },
     }
   end
@@ -57,8 +57,8 @@ describe ScoutCommand do
       end
     end
 
-    context "with rvm_ruby set" do
-      let(:rvm_ruby) { "ruby-1.9.2-p318@scout" }
+    context "with rvm_ruby_string set" do
+      let(:rvm_ruby_string) { "ruby-1.9.2-p318@scout" }
 
       it "uses the rvm wrapper" do
         should == %{/usr/local/rvm/bin/scout_scout #{key}}
@@ -69,12 +69,12 @@ describe ScoutCommand do
   describe "#rvm?" do
     subject { instance.rvm? }
 
-    context "rvm_ruby not set" do
+    context "rvm_ruby_string not set" do
       it { should be_false }
     end
 
-    context "rvm_ruby is set" do
-      let(:rvm_ruby) { "ruby-1.9.2-p318@scout" }
+    context "rvm_ruby_string is set" do
+      let(:rvm_ruby_string) { "ruby-1.9.2-p318@scout" }
       it { should be_true }
     end
   end
@@ -82,12 +82,12 @@ describe ScoutCommand do
   describe "executable" do
     subject { instance.executable }
 
-    context "rvm_ruby not set" do
+    context "rvm_ruby_string not set" do
       it { should == "scout" }
     end
 
-    context "rvm_ruby is set" do
-      let(:rvm_ruby) { "ruby-1.9.2-p318@scout" }
+    context "rvm_ruby_string is set" do
+      let(:rvm_ruby_string) { "ruby-1.9.2-p318@scout" }
       it { should == "/usr/local/rvm/bin/scout_scout" }
     end
   end

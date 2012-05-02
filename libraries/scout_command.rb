@@ -16,7 +16,7 @@ class ScoutCommand
   end
 
   def rvm?
-    node['scout']['rvm_ruby']
+    node['scout']['rvm_ruby_string']
   end
 
   def key

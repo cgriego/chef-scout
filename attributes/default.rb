@@ -2,8 +2,8 @@ default['scout']['home'] = "/home/scout"
 default['scout']['group'] = "scout"
 default['scout']['user'] = "scout"
 
-default['scout']['gem_packages'] = []
-default['scout']['rvm_ruby'] = nil
+default['scout']['gem_packages']
+default['scout']['rvm_ruby_string'] = nil
 default['scout']['version'] = "5.5.4"
 
 default['scout']['key'] = nil
