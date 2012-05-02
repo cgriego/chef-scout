@@ -53,21 +53,21 @@ will generally want to use Scout's cloud images feature and configure
 a key and name per role.
 
 ```ruby
-    name "web_server"
+name "web_server"
 
-    run_list "recipe[rvm::system]", "recipe[scout]"
+run_list "recipe[rvm::system]", "recipe[scout]"
 
-    default_attributes({
-      "scout" => {
-        "key" => "YOUR-WEB-SERVER-SCOUT-KEY",
-        "name" => "Web Server (%{name})",
-        "options" => {
-          "level" => "debug",
-        },
-        "rvm_ruby_string" => "ruby-1.9.3-p125@scout",
-        "gem_packages" => {
-          "request-log-analyzer" => nil,
-        },
-      },
-    })
+default_attributes({
+  "scout" => {
+    "key" => "YOUR-WEB-SERVER-SCOUT-KEY",
+    "name" => "Web Server (%{name})",
+    "options" => {
+      "level" => "debug",
+    },
+    "rvm_ruby_string" => "ruby-1.9.3-p125@scout",
+    "gem_packages" => {
+      "request-log-analyzer" => nil,
+    },
+  },
+})
 ```
