@@ -20,7 +20,9 @@ class ScoutCommand
   end
 
   def key
-    node['scout']['key'] or raise MissingKeyError
+    key_attribute = node['scout']['key']
+    key_value = key_attribute.is_a?(Hash) ? key_attribute[chef_environment] : key_attribute
+    key_value or raise MissingKeyError
   end
 
   def arguments
@@ -40,7 +42,13 @@ class ScoutCommand
     if node['scout']['name']
       node['scout']['name'].
       gsub("%{name}", node.to_hash['name']).
-      gsub("%{chef_environment}", node.to_hash['chef_environment'])
+      gsub("%{chef_environment}", chef_environment)
     end
+  end
+
+  private
+
+  def chef_environment
+    node.to_hash['chef_environment']
   end
 end

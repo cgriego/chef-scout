@@ -99,6 +99,15 @@ describe ScoutCommand do
     it "uses the key in the node attributes" do
       should == key
     end
+
+    context "environment-specific keys" do
+      before { node['scout'].merge!("key" => { node_environment => key }) }
+      include_examples "raises when no key is given"
+
+      it "looks up the key by environment" do
+        should == key
+      end
+    end
   end
 
   describe "#arguments" do
