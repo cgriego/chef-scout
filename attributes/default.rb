@@ -8,6 +8,8 @@ default['scout']['version'] = "5.5.4"
 
 default['scout']['key'] = nil
 default['scout']['name'] = nil
+default['scout']['name_prefix'] = nil
+default['scout']['name_suffix'] = nil
 default['scout']['options']
 
 default['scout']['config_dir'] = "#{node['scout']['home']}/.scout"

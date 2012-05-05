@@ -30,15 +30,17 @@ Agent Attributes
 
 * `node['scout']['key']` - The server's key provided by Scout
 * `node['scout']['name']` - The server name to show in Scout
+* `node['scout']['name_prefix']` - A common server name prefix to show in Scout
+* `node['scout']['name_suffix']` - A common server name suffix to show in Scout
 * `node['scout']['options']` - Additional options to pass as arguments to the Scout executable
 
 If you run Scout in multiple environments, then you can optionally set
 the key attribute to a Hash of key value pairs where the key is the
 chef environment name and the value is the key for that environment.
 
-If `%{name}` appears in your name attribute, this is will be replaced
+If `%{name}` appears in your name attributes, this is will be replaced
 with the node's name. If `%{chef_environment}` appears in your name
-attribute, then it will be replaced with the node's Chef environment.
+attributes, then it will be replaced with the node's Chef environment.
 
 The options attribute is a Hash where the keys are the long-form
 command line argument name and the value is the argument value.

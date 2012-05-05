@@ -4,8 +4,11 @@ require "scout_command"
 describe ScoutCommand do
   subject { instance }
   let(:instance) { described_class.new(node) }
+
   let(:key) { "key" }
   let(:name) { nil }
+  let(:name_prefix) { nil }
+  let(:name_suffix) { nil }
   let(:options) { {} }
   let(:node_name) { "i-12345678" }
   let(:node_environment) { "_default" }
@@ -18,6 +21,8 @@ describe ScoutCommand do
       "scout" => {
         "key" => key,
         "name" => name,
+        "name_prefix" => name_prefix,
+        "name_suffix" => name_suffix,
         "options" => options,
         "rvm_ruby_string" => rvm_ruby_string,
       },
@@ -168,8 +173,8 @@ describe ScoutCommand do
     end
   end
 
-  describe "#options" do
-    subject { instance.options }
+  describe "#command_options" do
+    subject { instance.command_options }
 
     context "when there are no extra options" do
       it { should == {} }
@@ -251,6 +256,59 @@ describe ScoutCommand do
 
       it "uses the node environment" do
         should == node_environment
+      end
+    end
+
+    context "a name and a name prefix" do
+      let(:name) { "Name" }
+      let(:name_prefix) { "Prefixed" }
+
+      it "prefixes the name" do
+        should == "Prefixed Name"
+      end
+
+      context "prefix contains %{name}" do
+        let(:name_prefix) { "%{name}" }
+
+        it "interpolates the node name in the prefix" do
+          should == "#{node_name} #{name}"
+        end
+      end
+    end
+
+    context "a name and a name suffix" do
+      let(:name) { "Name" }
+      let(:name_suffix) { "Suffixed" }
+
+      it "suffixes the name" do
+        should == "Name Suffixed"
+      end
+
+      context "suffix contains %{name}" do
+        let(:name_suffix) { "%{name}" }
+
+        it "interpolates the node name in the suffix" do
+          should == "#{name} #{node_name}"
+        end
+      end
+    end
+
+    context "a name, name prefix, and a name suffix" do
+      let(:name) { "Name" }
+      let(:name_prefix) { "Prefixed" }
+      let(:name_suffix) { "Suffixed" }
+
+      it "prefixes and suffixes the name" do
+        should == "Prefixed Name Suffixed"
+      end
+
+      context "prefix contains %{chef_environment} and the suffix contains %{name}" do
+        let(:name_prefix) { "%{chef_environment}" }
+        let(:name_suffix) { "(%{name})" }
+
+        it "interpolates the node name and chef environment" do
+          should == "#{node_environment} #{name} (#{node_name})"
+        end
       end
     end
   end
