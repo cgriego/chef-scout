@@ -10,7 +10,7 @@ guard "rspec", :cli => "--color --format nested", :version => 2 do
   watch(%r{^spec/support/(.+)\.rb$}) { "spec" }
 end
 
-guard "foodcritic", :cookbook_paths => "." do
+guard "foodcritic", :cookbook_paths => ".", :cli => "--epic-fail any --include rules" do
   watch(%r{attributes/.+\.rb$})
   watch(%r{providers/.+\.rb$})
   watch(%r{recipes/.+\.rb$})

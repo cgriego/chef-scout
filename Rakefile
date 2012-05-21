@@ -6,5 +6,5 @@ task :default => [:spec, :foodcritic]
 RSpec::Core::RakeTask.new
 
 task :foodcritic do
-  sh %{foodcritic . --epic-fail any}
+  sh %{foodcritic . --epic-fail any --include rules}
 end
