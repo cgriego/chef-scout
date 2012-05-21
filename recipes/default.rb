@@ -24,7 +24,7 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-install_recipe = node['scout']['rvm_ruby_string'] ? "rvm_install" : "install"
+install_recipe = node['scout']['rvm_ruby_string'] ? "rvm_install" : "gem_install"
 
 include_recipe "scout::user" unless node['scout']['user'] == "root"
 include_recipe "scout::public_private_key" if node['scout']['plugin_public_key']
