@@ -21,7 +21,7 @@ class ScoutCommand
 
   def key
     key_attribute = options['key']
-    key_value = key_attribute.is_a?(Hash) ? key_attribute[chef_environment] : key_attribute
+    key_value = key_attribute.respond_to?(:has_key?) ? key_attribute[chef_environment] : key_attribute
     key_value or raise MissingKeyError
   end
 
