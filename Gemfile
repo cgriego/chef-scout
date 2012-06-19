@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "chef", "~> 0.10.8"
+gem "chef", ">= 0.10.8", "< 11.0.0"
 gem "foodcritic"
 gem "growl"
 gem "guard"
