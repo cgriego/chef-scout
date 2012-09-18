@@ -11,6 +11,7 @@ default['scout']['name'] = nil
 default['scout']['name_prefix'] = nil
 default['scout']['name_suffix'] = nil
 default['scout']['options']
+default['scout']['log_file'] = nil
 
 default['scout']['config_dir'] = "#{node['scout']['home']}/.scout"
 default['scout']['plugin_public_key'] = nil

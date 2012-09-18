@@ -8,7 +8,7 @@ class ScoutCommand
   end
 
   def to_s
-    [executable, key, arguments].join(" ").strip
+    [executable, key, arguments, output_redirection].compact.join(" ")
   end
 
   def executable
@@ -29,7 +29,7 @@ class ScoutCommand
     command_options.inject([]) do |array, (option, value)|
       array << %{--#{option} '#{value.gsub("'", "\\\\'")}'}
       array
-    end.join(" ")
+    end.join(" ") if command_options.any?
   end
 
   def command_options
@@ -45,6 +45,12 @@ class ScoutCommand
       join(" ").
       gsub("%{name}", node.to_hash['name']).
       gsub("%{chef_environment}", chef_environment)
+    end
+  end
+
+  def output_redirection
+    if options['log_file']
+      "> #{options['log_file']} 2>&1"
     end
   end
 

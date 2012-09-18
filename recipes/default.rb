@@ -29,4 +29,5 @@ install_recipe = node['scout']['rvm_ruby_string'] ? "rvm_install" : "gem_install
 include_recipe "scout::user" unless node['scout']['user'] == "root"
 include_recipe "scout::plugin_public_key" if node['scout']['plugin_public_key']
 include_recipe "scout::#{install_recipe}"
+include_recipe "scout::log_dir" if node['scout']['log_file'] && node['scout']['log_file'] != "/dev/null"
 include_recipe "scout::cron"

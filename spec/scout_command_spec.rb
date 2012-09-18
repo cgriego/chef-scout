@@ -13,6 +13,7 @@ describe ScoutCommand do
   let(:node_name) { "i-12345678" }
   let(:node_environment) { "_default" }
   let(:rvm_ruby_string) { nil }
+  let(:log_file) { nil }
 
   let :node do
     {
@@ -25,6 +26,7 @@ describe ScoutCommand do
         "name_suffix" => name_suffix,
         "options" => options,
         "rvm_ruby_string" => rvm_ruby_string,
+        "log_file" => log_file,
       },
     }
   end
@@ -67,6 +69,14 @@ describe ScoutCommand do
 
       it "uses the rvm wrapper" do
         should == %{/usr/local/rvm/bin/scout_scout #{key}}
+      end
+    end
+
+    context "with output redirection" do
+      let(:log_file) { "/path/to/anywhere/scout.out" }
+
+      it "redirects the output" do
+        should == %{scout #{key} > /path/to/anywhere/scout.out 2>&1}
       end
     end
   end
@@ -119,7 +129,7 @@ describe ScoutCommand do
     subject { instance.arguments }
 
     context "when there are no extra options" do
-      it { should == "" }
+      it { should be_nil }
     end
 
     context "when options are provided" do
@@ -310,6 +320,20 @@ describe ScoutCommand do
           should == "#{node_environment} #{name} (#{node_name})"
         end
       end
+    end
+  end
+
+  describe "#output_redirection" do
+    subject { instance.output_redirection }
+
+    context "output redirection is not set" do
+      it { should be_nil }
+    end
+
+    context "output redirection is set to /dev/null" do
+      let(:log_file) { "/dev/null" }
+
+      it { should == "> /dev/null 2>&1" }
     end
   end
 end
