@@ -1,5 +1,6 @@
 default['scout']['user'] = "scout"
 default['scout']['group'] = node['scout']['user']
+default['scout']['groups'] = []
 default['scout']['home'] = "/home/#{node['scout']['user']}"
 
 default['scout']['gem_packages']

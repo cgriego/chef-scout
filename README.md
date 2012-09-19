@@ -13,6 +13,7 @@ User Attributes
 
 * `node['scout']['user']` - The user Scout is executed as
 * `node['scout']['group']` - The group of the Scout user
+* `node['scout']['groups']` - Groups to append the Scout user to, if they exist
 * `node['scout']['home']` - The home directory of the Scout user, Scout uses this for storage by default
 
 Environment Attributes
