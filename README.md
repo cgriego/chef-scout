@@ -29,6 +29,7 @@ Agent Attributes
 ----------------
 
 * `node['scout']['key']` - The server's key provided by Scout
+* `node['scout']['log_file']` - Full path used to redirect the output of the cron job
 * `node['scout']['name']` - The server name to show in Scout
 * `node['scout']['name_prefix']` - A common server name prefix to show in Scout
 * `node['scout']['name_suffix']` - A common server name suffix to show in Scout
