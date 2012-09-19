@@ -50,7 +50,7 @@ class ScoutCommand
 
   def output_redirection
     if options['log_file']
-      "> #{options['log_file']} 2>&1"
+      ">> #{options['log_file']} 2>&1"
     end
   end
 

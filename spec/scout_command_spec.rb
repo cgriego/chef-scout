@@ -76,7 +76,7 @@ describe ScoutCommand do
       let(:log_file) { "/path/to/anywhere/scout.out" }
 
       it "redirects the output" do
-        should == %{scout #{key} > /path/to/anywhere/scout.out 2>&1}
+        should == %{scout #{key} >> /path/to/anywhere/scout.out 2>&1}
       end
     end
   end
@@ -333,7 +333,7 @@ describe ScoutCommand do
     context "output redirection is set to /dev/null" do
       let(:log_file) { "/dev/null" }
 
-      it { should == "> /dev/null 2>&1" }
+      it { should == ">> /dev/null 2>&1" }
     end
   end
 end
