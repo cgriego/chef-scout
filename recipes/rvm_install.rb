@@ -14,5 +14,6 @@ end
 
 rvm_wrapper "scout" do
   binary "scout"
+  prefix node['scout']['rvm_wrapper_prefix']
   ruby_string node['scout']['rvm_ruby_string']
 end

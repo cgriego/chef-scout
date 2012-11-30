@@ -21,6 +21,7 @@ Environment Attributes
 
 * `node['scout']['version']` - The Scout rubygem version
 * `node['scout']['rvm_ruby_string']` - The RVM-based Ruby version (and optionally gemset) for Scout
+* `node['scout']['rvm_wrapper_prefix']` - The prefix to use for the RVM wrapper script
 * `node['scout']['gem_packages']` - List gems (and optionally versions) that your Scout plugins need
 
 The gem_packages attribute is a Hash where the keys are rubygem names

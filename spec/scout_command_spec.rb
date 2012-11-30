@@ -14,6 +14,7 @@ describe ScoutCommand do
   let(:node_environment) { "_default" }
   let(:rvm_ruby_string) { nil }
   let(:log_file) { nil }
+  let(:rvm_wrapper_prefix) { "scout" }
 
   let :node do
     {
@@ -26,6 +27,7 @@ describe ScoutCommand do
         "name_suffix" => name_suffix,
         "options" => options,
         "rvm_ruby_string" => rvm_ruby_string,
+        "rvm_wrapper_prefix" => rvm_wrapper_prefix,
         "log_file" => log_file,
       },
     }
@@ -94,7 +96,7 @@ describe ScoutCommand do
     end
   end
 
-  describe "executable" do
+  describe "#executable" do
     subject { instance.executable }
 
     context "rvm_ruby_string not set" do
@@ -104,6 +106,16 @@ describe ScoutCommand do
     context "rvm_ruby_string is set" do
       let(:rvm_ruby_string) { "ruby-1.9.2-p318@scout" }
       it { should == "/usr/local/rvm/bin/scout_scout" }
+
+      context "rvm_wrapper_prefix is set to 'run'" do
+        let(:rvm_wrapper_prefix) { "run" }
+        it { should == "/usr/local/rvm/bin/run_scout" }
+      end
+
+      context "rvm_wrapper_prefix is set to false" do
+        let(:rvm_wrapper_prefix) { false }
+        it { should == "/usr/local/rvm/bin/scout" }
+      end
     end
   end
 

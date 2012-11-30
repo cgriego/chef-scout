@@ -12,7 +12,8 @@ class ScoutCommand
   end
 
   def executable
-    rvm? ? "/usr/local/rvm/bin/scout_scout" : "scout"
+    rvm_command = options['rvm_wrapper_prefix'] ? "#{options['rvm_wrapper_prefix']}_scout" : "scout"
+    rvm? ? "/usr/local/rvm/bin/#{rvm_command}" : "scout"
   end
 
   def rvm?
