@@ -13,11 +13,29 @@ class ScoutCommand
 
   def executable
     rvm_command = options['rvm_wrapper_prefix'] ? "#{options['rvm_wrapper_prefix']}_scout" : "scout"
-    rvm? ? "/usr/local/rvm/bin/#{rvm_command}" : "scout"
+    if rvm?
+      "/usr/local/rvm/bin/#{rvm_command}"
+    elsif rbenv?
+      rbenv_executable
+    else
+      "scout"
+    end
   end
 
   def rvm?
     options['rvm_ruby_string']
+  end
+
+  def rbenv?
+    ::File.exist? rbenv_executable
+  end
+
+  def rbenv_executable
+    if node.has_key?('rbenv')
+      "#{node['rbenv']['root']}/shims/scout"
+    else
+      ''
+    end
   end
 
   def key
